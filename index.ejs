@@ -1,0 +1,27 @@
+<html>
+<body>
+
+<script type="text/javascript">
+	const tempoRestante = Date.parse("<%= usuarioSession.dados.info.dataAcaba %>".replace(/(\d{2})\/(\d{2})\/(\d{4})/, "$2/$1/$3"))
+
+	setInterval(() => {
+		let diferenca = Math.floor((tempoRestante - Date.now()) / 1000)
+
+		let restante = {
+			dias: Math.floor(diferenca / (60 * 60) / 24),
+			horas: Math.floor(diferenca / (60 * 60) % 24),
+			minutos: Math.floor(diferenca / 60 % 60),
+			segundos: Math.floor(diferenca % 60)
+		}
+
+		document.getElementById("tempoRestante").innerHTML = `Você tem ${restante.dias} Dias, ${restante.horas} Horas, ${restante.minutos} Minutos e ${restante.segundos} Segundos restantes`
+	}, 1000)
+
+</script>
+<h1>Olá <%= usuarioSession.usuario %></h1>
+<h2 id="tempoRestante"></h2>
+
+</div>
+
+</body>
+</html>

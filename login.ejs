@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+</head>
+<script type="text/javascript">
+    window.onload = function(){
+        document.getElementById("logar").onclick = function(){
+            let usuario = document.getElementById("usuario").value
+            let senha = document.getElementById("senha").value
+            $.ajax({url: '/login', type: 'POST', data: `usuario=${usuario}&senha=${senha}`,
+                success: (data) => {
+                	data = JSON.parse(data)
+                	data.status ? location.reload() : alert(data.message)
+                	
+                }
+            });
+        }
+    }
+</script>
+
+<body>
+    <input type="text" id="usuario">
+    <input type="password" id="senha">
+    <button type="submit" id="logar">Logar</button>
+</body>
+</html>
